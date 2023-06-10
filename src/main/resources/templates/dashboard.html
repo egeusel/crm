@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Dashboard</title>
+  <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}" />
+</head>
+<body>
+<h2 th:text="'Hello, ' + ${username}"></h2>
+<div>
+  <a href="/add-customer">Add Customer</a>
+</div>
+<div>
+  <a href="/add-employee">Add Employee</a>
+</div>
+</body>
+</html>
