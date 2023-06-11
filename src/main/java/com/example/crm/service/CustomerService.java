@@ -16,6 +16,15 @@ public class CustomerService {
         return customerRepository.findAll();
     }
 
+    public void saveCustomer(String name, String email, String phoneNumber, String birthYear) {
+        Customer customer = new Customer();
+        customer.setName(name);
+        customer.setEmail(email);
+        customer.setPhoneNumber(phoneNumber);
+
+        customerRepository.save(customer);
+    }
+
     // Below is just written for good practice. We could have accessed the Repository directly from the
     // controller level but it is not a good practice. So in order to respect the abstraction barriers
     // we access controller --> service --> repository

@@ -21,16 +21,9 @@ public class CustomerController {
     @Autowired
     private CustomerService customerService;
 
-    @PostMapping("/save-customer")   // post request. This method is used by add-customer.html
-    public String saveCustomer(String name, String email, String phoneNumber) {
-        Customer customer = new Customer();
-        customer.setName(name);
-        customer.setEmail(email);
-        customer.setPhoneNumber(phoneNumber);
-
-        customerRepository.save(customer);
-
-// Redirect to dashboard after saving the customer
+    @PostMapping("/save-customer")   // Matches the action attribute in html: <form action="/customers/save-customer" method="post" class="mt-4">
+    public String saveCustomer(String name, String email, String phoneNumber, String birthYear) {
+        customerService.saveCustomer(name, email, phoneNumber, birthYear);
         return "redirect:/dashboard";
     }
 
@@ -38,7 +31,7 @@ public class CustomerController {
     public String searchCustomer(@RequestParam("search") String search, Model model) {
         List<Customer> customers = customerService.searchCustomersByName(search);
         model.addAttribute("customers", customers);
-        return "dashboard/search-customer";
+        return "search-customer";
     }
 
 // You can add other methods to handle different CRUD operations later
