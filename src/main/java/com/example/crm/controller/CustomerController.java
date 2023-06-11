@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 
 import java.util.List;
@@ -32,6 +33,32 @@ public class CustomerController {
         List<Customer> customers = customerService.searchCustomersByName(search);
         model.addAttribute("customers", customers);
         return "search-customer";
+    }
+
+    @PostMapping("/update-customer")
+    public String updateCustomer(@RequestParam Integer id,
+                                 @RequestParam String name,
+                                 @RequestParam String email,
+                                 @RequestParam String phoneNumber,
+                                 RedirectAttributes redirectAttributes) {
+        try {
+            customerService.updateCustomer(id, name, email, phoneNumber);
+            redirectAttributes.addFlashAttribute("success", "Customer updated successfully");
+        } catch (IllegalArgumentException e) {
+            redirectAttributes.addFlashAttribute("error", e.getMessage());
+        }
+        return "redirect:/dashboard";
+    }
+
+    @PostMapping("/delete-customer")
+    public String deleteCustomer(@RequestParam Integer customerId, RedirectAttributes redirectAttributes) {
+        try {
+            customerService.deleteCustomer(customerId);
+            redirectAttributes.addFlashAttribute("success", "Customer deleted successfully");
+        } catch (Exception e) {
+            redirectAttributes.addFlashAttribute("error", "Error deleting customer. Please check the customer ID and try again.");
+        }
+        return "redirect:/dashboard";
     }
 
 // You can add other methods to handle different CRUD operations later

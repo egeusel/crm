@@ -1,20 +1,68 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+
 <head>
+  <meta charset="UTF-8">
   <title>Update Customer</title>
-  <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
+
 <body>
-<h1>Update Customer</h1>
-<form action="#" th:action="@{/update-customer}" method="post">
-  <!-- Fields to update customer info. You may also want a field to select which customer to update -->
-  <label for="name">Name:</label>
-  <input type="text" id="name" name="name">
-  <br>
-  <label for="email">Email:</label>
-  <input type="email" id="email" name="email">
-  <br>
-  <input type="submit" value="Update Customer">
-</form>
+
+<div class="container mt-5">
+
+  <h2 class="text-center">Update Customer</h2>
+
+  <form action="/customers/update-customer" method="post" class="mt-4">
+    <div class="mb-3">
+      <label for="id" class="form-label">Customer ID:</label>
+      <input type="text" class="form-control" id="id" name="id" required>
+    </div>
+
+    <div class="mb-3">
+      <label for="name" class="form-label">Name:</label>
+      <input type="text" class="form-control" id="name" name="name">
+    </div>
+
+    <div class="mb-3">
+      <label for="email" class="form-label">Email:</label>
+      <input type="email" class="form-control" id="email" name="email">
+    </div>
+
+    <div class="mb-3">
+      <label for="phoneNumber" class="form-label">Phone Number:</label>
+      <input type="text" class="form-control" id="phoneNumber" name="phoneNumber">
+    </div>
+
+    <button type="submit" class="btn btn-primary">Update Customer</button>
+  </form>
+
+</div>
+
 </body>
+
 </html>
+
+
+
+
+<!--<!DOCTYPE html>-->
+<!--<html xmlns:th="http://www.thymeleaf.org">-->
+<!--<head>-->
+<!--  <title>Update Customer</title>-->
+<!--  <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}">-->
+<!--</head>-->
+<!--<body>-->
+<!--<h1>Update Customer</h1>-->
+<!--<form action="#" th:action="@{/update-customer}" method="post">-->
+<!--  &lt;!&ndash; Fields to update customer info. You may also want a field to select which customer to update &ndash;&gt;-->
+<!--  <label for="name">Name:</label>-->
+<!--  <input type="text" id="name" name="name">-->
+<!--  <br>-->
+<!--  <label for="email">Email:</label>-->
+<!--  <input type="email" id="email" name="email">-->
+<!--  <br>-->
+<!--  <input type="submit" value="Update Customer">-->
+<!--</form>-->
+<!--</body>-->
+<!--</html>-->
