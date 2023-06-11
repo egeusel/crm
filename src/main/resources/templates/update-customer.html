@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Update Customer</title>
+  <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}">
+</head>
+<body>
+<h1>Update Customer</h1>
+<form action="#" th:action="@{/update-customer}" method="post">
+  <!-- Fields to update customer info. You may also want a field to select which customer to update -->
+  <label for="name">Name:</label>
+  <input type="text" id="name" name="name">
+  <br>
+  <label for="email">Email:</label>
+  <input type="email" id="email" name="email">
+  <br>
+  <input type="submit" value="Update Customer">
+</form>
+</body>
+</html>

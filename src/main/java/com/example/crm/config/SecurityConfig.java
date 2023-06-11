@@ -25,8 +25,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .anyRequest().authenticated()
                 .and()
                 .formLogin()
-                .loginPage("/login")
-                .defaultSuccessUrl("/dashboard", true)
+                .loginPage("/login")                                              // identifying the login.html
+                .defaultSuccessUrl("/dashboard", true)  // when login successful, direct to dashboard of the employee
                 .permitAll()
                 .and()
                 .logout()

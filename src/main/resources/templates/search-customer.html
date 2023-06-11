@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Search Customer</title>
+  <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}">
+</head>
+<body>
+<h1>Search Customer</h1>
+<form action="#" th:action="@{/search-customer}" method="post">
+  <label for="search">Search:</label>
+  <input type="text" id="search" name="search">
+  <br>
+  <input type="submit" value="Search Customer">
+</form>
+<!-- You will populate this table with the results -->
+<table>
+  <!-- headers and data rows go here -->
+</table>
+</body>
+</html>
