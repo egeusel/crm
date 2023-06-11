@@ -21,7 +21,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .authorizeRequests()
-                .antMatchers("/", "/index", "/register").permitAll() // Permit access to index and registration page without authentication
+                .antMatchers("/", "/index", "/register", "/dashboard/**", "/customers/**").permitAll() // Permit access to index and registration page without authentication
                 .anyRequest().authenticated()
                 .and()
                 .formLogin()
@@ -30,7 +30,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .permitAll()
                 .and()
                 .logout()
-                .permitAll();
+                .permitAll()
+                .and()
+                .csrf().disable(); // Disabling CSRF for simplicity, though it's not recommended for production (recall Cross-Site Request Forgery)
     }
 
     @Autowired
@@ -43,4 +45,3 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         return new BCryptPasswordEncoder();
     }
 }
-

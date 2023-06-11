@@ -16,5 +16,12 @@ public class CustomerService {
         return customerRepository.findAll();
     }
 
+    // Below is just written for good practice. We could have accessed the Repository directly from the
+    // controller level but it is not a good practice. So in order to respect the abstraction barriers
+    // we access controller --> service --> repository
+    public List<Customer> searchCustomersByName(String name) {
+        return customerRepository.findByName(name);
+    }
+
     // Other CRUD operations...
 }
