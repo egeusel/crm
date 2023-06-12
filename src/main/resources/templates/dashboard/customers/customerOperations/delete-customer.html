@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 
 <head>
   <meta charset="UTF-8">
@@ -8,24 +8,46 @@
 </head>
 
 <body>
-  <a href="/customers" class="btn btn-success" style="position: absolute; top: 10px; left: 10px;">Back</a>
+<a href="/customers" class="btn btn-success" style="position: absolute; top: 10px; left: 10px;">Back</a>
 
-  <div class="container mt-5">
+<div class="container mt-5">
 
-    <h2 class="text-center">Delete Customer</h2>
-
-    <form action="/delete-customer" method="post" class="mt-4">
-      <div class="mb-3">
-        <label for="customerId" class="form-label">Customer ID:</label>
-        <input type="text" class="form-control" id="customerId" name="customerId" required>
-      </div>
-      <button type="submit" class="btn btn-danger">Delete Customer</button>
-    </form>
-
+  <!-- Display success message -->
+  <div th:if="${success}" class="alert alert-success" role="alert" id="successMessage">
+    <p th:text="${success}"></p>
   </div>
+
+  <!-- Display error message -->
+  <div th:if="${error}" class="alert alert-danger" role="alert" id="errorMessage">
+    <p th:text="${error}"></p>
+  </div>
+
+  <h2 class="text-center">Delete Customer</h2>
+
+  <form action="/delete-customer" method="post" class="mt-4">
+    <div class="mb-3">
+      <label for="customerId" class="form-label">Customer ID:</label>
+      <input type="text" class="form-control" id="customerId" name="customerId" required>
+    </div>
+    <button type="submit" class="btn btn-danger">Delete Customer</button>
+  </form>
+
+</div>
+
+<!-- Script to hide messages after 5 seconds -->
+<script>
+        setTimeout(function() {
+            var successMessage = document.getElementById('successMessage');
+            var errorMessage = document.getElementById('errorMessage');
+            if (successMessage) {
+                successMessage.style.display = 'none';
+            }
+            if (errorMessage) {
+                errorMessage.style.display = 'none';
+            }
+        }, 5000); // 5000ms = 5 seconds
+    </script>
 
 </body>
 
 </html>
-
-

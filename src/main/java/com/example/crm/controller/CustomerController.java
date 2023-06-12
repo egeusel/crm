@@ -24,12 +24,17 @@ public class CustomerController {
         return "dashboard/customers/customerOperations/add-customer";
     }
 
-    // Save a customer and redirect to the customers page
     @PostMapping("/save-customer")
-    public String saveCustomer(String name, String email, String phoneNumber, String birthYear) {
-        customerService.saveCustomer(name, email, phoneNumber, birthYear);
-        return "dashboard/customers/customerOperations/add-customer";
+    public String saveCustomer(String name, String email, String phoneNumber, String birthYear, RedirectAttributes redirectAttributes) {
+        try {
+            customerService.saveCustomer(name, email, phoneNumber, birthYear);
+            redirectAttributes.addFlashAttribute("successMessage", "Customer added successfully!");
+        } catch (Exception e) {
+            redirectAttributes.addFlashAttribute("errorMessage", "Error adding customer. Please try again.");
+        }
+        return "redirect:/add-customer"; // <-- changed this
     }
+
 
     // Show search customer page
     @GetMapping("/search-customer")
@@ -64,7 +69,7 @@ public class CustomerController {
         } catch (IllegalArgumentException e) {
             redirectAttributes.addFlashAttribute("error", e.getMessage());
         }
-        return "dashboard/customers/customerOperations/update-customer";
+        return "redirect:/update-customer";
     }
 
     // Show delete customer page
@@ -73,7 +78,6 @@ public class CustomerController {
         return "dashboard/customers/customerOperations/delete-customer";
     }
 
-    // Delete a customer
     @PostMapping("/delete-customer")
     public String deleteCustomer(@RequestParam Integer customerId, RedirectAttributes redirectAttributes) {
         try {
@@ -82,6 +86,13 @@ public class CustomerController {
         } catch (Exception e) {
             redirectAttributes.addFlashAttribute("error", "Error deleting customer. Please check the customer ID and try again.");
         }
-        return "dashboard/customers/customerOperations/delete-customer"; // "redirect:/dashboard/customers"
+        return "redirect:/delete-customer";
+    }
+
+    @GetMapping("/view-all-customers")
+    public String viewAllCustomers(Model model) {
+        List<Customer> customers = customerService.getAllCustomers();
+        model.addAttribute("customers", customers);
+        return "dashboard/customers/customerOperations/view-all-customers";
     }
 }

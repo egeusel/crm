@@ -13,7 +13,6 @@ public class User {
     private String password;
 
     // Getters and Setters
-
     public Long getId() {
         return id;
     }

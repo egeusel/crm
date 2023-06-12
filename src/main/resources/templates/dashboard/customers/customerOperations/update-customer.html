@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 
 <head>
   <meta charset="UTF-8">
@@ -8,64 +8,66 @@
 </head>
 
 <body>
-
 <a href="/customers" class="btn btn-success" style="position: absolute; top: 10px; left: 10px;">Back</a>
 
+<div class="container mt-5">
 
-  <div class="container mt-5">
-
-    <h2 class="text-center">Update Customer</h2>
-
-    <form action="/update-customer" method="post" class="mt-4">
-      <div class="mb-3">
-        <label for="id" class="form-label">Customer ID:</label>
-        <input type="text" class="form-control" id="id" name="id" required>
-      </div>
-
-      <div class="mb-3">
-        <label for="name" class="form-label">Name:</label>
-        <input type="text" class="form-control" id="name" name="name">
-      </div>
-
-      <div class="mb-3">
-        <label for="email" class="form-label">Email:</label>
-        <input type="email" class="form-control" id="email" name="email">
-      </div>
-
-      <div class="mb-3">
-        <label for="phoneNumber" class="form-label">Phone Number:</label>
-        <input type="text" class="form-control" id="phoneNumber" name="phoneNumber">
-      </div>
-
-      <button type="submit" class="btn btn-primary">Update Customer</button>
-    </form>
-
+  <!-- Display success message -->
+  <div th:if="${success}" class="alert alert-success" role="alert" id="successMessage">
+    <p th:text="${success}"></p>
   </div>
+
+  <!-- Display error message -->
+  <div th:if="${error}" class="alert alert-danger" role="alert" id="errorMessage">
+    <p th:text="${error}"></p>
+  </div>
+
+  <h2 class="text-center">Update Customer</h2>
+
+  <!-- Note to find Customer ID using search functionality -->
+  <div class="alert alert-info" role="alert">
+    <p>Note: You can find the Customer ID by using the search functionality, from customer menu.</p>
+  </div>
+
+  <form action="/update-customer" method="post" class="mt-4">
+    <div class="mb-3">
+      <label for="id" class="form-label">Customer ID:</label>
+      <input type="text" class="form-control" id="id" name="id" required>
+    </div>
+
+    <div class="mb-3">
+      <label for="name" class="form-label">Name:</label>
+      <input type="text" class="form-control" id="name" name="name">
+    </div>
+
+    <div class="mb-3">
+      <label for="email" class="form-label">Email:</label>
+      <input type="email" class="form-control" id="email" name="email">
+    </div>
+
+    <div class="mb-3">
+      <label for="phoneNumber" class="form-label">Phone Number:</label>
+      <input type="text" class="form-control" id="phoneNumber" name="phoneNumber">
+    </div>
+
+    <button type="submit" class="btn btn-primary">Update Customer</button>
+  </form>
+</div>
+
+<!-- Script to hide messages after 5 seconds -->
+<script>
+        setTimeout(function () {
+            var successMessage = document.getElementById('successMessage');
+            var errorMessage = document.getElementById('errorMessage');
+            if (successMessage) {
+                successMessage.style.display = 'none';
+            }
+            if (errorMessage) {
+                errorMessage.style.display = 'none';
+            }
+        }, 5000); // 5000ms = 5 seconds
+    </script>
 
 </body>
 
 </html>
-
-
-
-
-<!--<!DOCTYPE html>-->
-<!--<html xmlns:th="http://www.thymeleaf.org">-->
-<!--<head>-->
-<!--  <title>Update Customer</title>-->
-<!--  <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}">-->
-<!--</head>-->
-<!--<body>-->
-<!--<h1>Update Customer</h1>-->
-<!--<form action="#" th:action="@{/update-customer}" method="post">-->
-<!--  &lt;!&ndash; Fields to update customer info. You may also want a field to select which customer to update &ndash;&gt;-->
-<!--  <label for="name">Name:</label>-->
-<!--  <input type="text" id="name" name="name">-->
-<!--  <br>-->
-<!--  <label for="email">Email:</label>-->
-<!--  <input type="email" id="email" name="email">-->
-<!--  <br>-->
-<!--  <input type="submit" value="Update Customer">-->
-<!--</form>-->
-<!--</body>-->
-<!--</html>-->
