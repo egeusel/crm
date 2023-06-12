@@ -21,7 +21,11 @@ public class RegistrationController {
 
     @GetMapping("/register")
     public String register() {
-        return "register";
+        return "register"; // this is called and it corresponds to .../templates/register.html by default
+                           /*
+                           Thymeleaf is configured to recognize that the views are HTML templates, so you
+                           only need to specify the path and name of the file without the extension.
+                            */
     }
 
     @PostMapping("/register")
@@ -35,7 +39,7 @@ public class RegistrationController {
         user.setUsername(username);
         user.setPassword(passwordEncoder.encode(password));
         userRepository.save(user);
-        return "redirect:/login";
+        return "redirect:/";  // No longer redirect:/login as we changed the design
     }
 
 }

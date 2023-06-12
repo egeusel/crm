@@ -1,44 +1,31 @@
 package com.example.crm.controller;
 
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.web.bind.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
-@RequestMapping("/dashboard")
 public class DashboardController {
 
+    @GetMapping("/dashboard")
+    public String viewDashboard(@AuthenticationPrincipal UserDetails userDetails, Model model) {
+        // Pass the username to the model
+        model.addAttribute("username", userDetails.getUsername());
+        return "dashboard/dashboard";
+}
 
-    @GetMapping // This will map to /dashboard
-    public String dashboard() {
-        return "dashboard"; // This should return the dashboard view (e.g. dashboard.html)
+    // Navigating to customers.html when clicking on the first image on the dashboard
+    @GetMapping("/customers")
+    public String viewCustomers() {
+        return "dashboard/customers/customers";
     }
 
-    @GetMapping("/add-customer")
-    public String showAddCustomerPage() {
-        return "add-customer";
-    }
-
-    @GetMapping("/search-customer")
-    public String showSearchCustomerPage() {
-        return "search-customer";
-    }
-
-    @GetMapping("/update-customer")
-    public String showUpdateCustomerPage() {
-        return "update-customer";
-    }
-
-    @GetMapping("/delete-customer")
-    public String showDeleteCustomerPage() {
-        return "delete-customer";
-    }
-
-    @GetMapping("/view-reports")
-    public String showViewReportsPage() {
-        return "view-reports";
+    // Navigating to sales.html when clicking on the second image on the dashboard
+    @GetMapping("/sales")
+    public String viewSales() {
+        return "dashboard/sales/sales";
     }
 }
 

@@ -8,12 +8,14 @@
 </head>
 
 <body>
+<a href="/customers" class="btn btn-success" style="position: absolute; top: 10px; left: 10px;">Back</a>
+
 
 <div class="container mt-5">
 
   <h2 class="text-center">Search Customer</h2>
 
-  <form action="/customers/search-customer" method="post" class="mt-4">
+  <form action="/search-customer" method="post" class="mt-4">
     <div class="mb-3">
       <label for="search" class="form-label">Search by Name:</label>
       <input type="text" class="form-control" id="search" name="search" required>
@@ -61,29 +63,3 @@
 </body>
 
 </html>
-
-
-
-
-
-
-<!--<!DOCTYPE html>-->
-<!--<html xmlns:th="http://www.thymeleaf.org">-->
-<!--<head>-->
-<!--  <title>Search Customer</title>-->
-<!--  <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}">-->
-<!--</head>-->
-<!--<body>-->
-<!--<h1>Search Customer</h1>-->
-<!--<form action="#" th:action="@{/search-customer}" method="post">-->
-<!--  <label for="search">Search:</label>-->
-<!--  <input type="text" id="search" name="search">-->
-<!--  <br>-->
-<!--  <input type="submit" value="Search Customer">-->
-<!--</form>-->
-<!--&lt;!&ndash; You will populate this table with the results &ndash;&gt;-->
-<!--<table>-->
-<!--  &lt;!&ndash; headers and data rows go here &ndash;&gt;-->
-<!--</table>-->
-<!--</body>-->
-<!--</html>-->

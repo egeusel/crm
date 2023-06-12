@@ -11,37 +11,41 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 @Configuration
-@EnableWebSecurity
+@EnableWebSecurity // Enable Spring Security
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
-    @Autowired
+    @Autowired // Inject UserDetailsService for user authentication
     private UserDetailsService userDetailsService;
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .authorizeRequests()
-                .antMatchers("/", "/index", "/register", "/dashboard/**", "/customers/**").permitAll() // Permit access to index and registration page without authentication
-                .anyRequest().authenticated()
+                .antMatchers("/", "/register", "/dashboard/**", "/customers/**") // Specify the URLs that can be accessed without authentication
+                .permitAll()
+                .anyRequest().authenticated() // Any request not mentioned above must be authenticated
                 .and()
                 .formLogin()
-                .loginPage("/login")                                              // identifying the login.html
-                .defaultSuccessUrl("/dashboard", true)  // when login successful, direct to dashboard of the employee
-                .permitAll()
+                .loginPage("/") // Specify the URL of the login form
+                .loginProcessingUrl("/login") // Specify the URL to submit the login form
+                .defaultSuccessUrl("/dashboard", true) // Specify the default URL to redirect to after a successful login
+                .permitAll() // Allow all users (even unauthenticated) to access the login form
                 .and()
-                .logout()
-                .permitAll()
+                .logout() // Configures logout functionality
+                .permitAll() // Allow all users to perform a logout
                 .and()
-                .csrf().disable(); // Disabling CSRF for simplicity, though it's not recommended for production (recall Cross-Site Request Forgery)
+                .csrf().disable(); // Disable CSRF protection (not recommended for production)
     }
 
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
+        // Configure the authentication manager builder with the userDetailsService and password encoder
         auth.userDetailsService(userDetailsService).passwordEncoder(new BCryptPasswordEncoder());
     }
 
     @Bean
     public BCryptPasswordEncoder passwordEncoder() {
+        // Bean for the password encoder. BCrypt is a good choice for securely hashing passwords.
         return new BCryptPasswordEncoder();
     }
 }
